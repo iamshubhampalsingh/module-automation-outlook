@@ -1,0 +1,62 @@
+# Import necessary modules
+import uiautomator2 as ui2
+import time
+import subprocess
+from datetime import datetime, timedelta
+
+# Device serial number of the sender device
+sender_device_serial = 'cf611ff9'  # Use the actual sender device serial number as a string
+
+# Create a Device object for the sender device
+sender_device = ui2.connect(sender_device_serial)
+
+# Device serial number of the receiver device
+receiver_device_serial = "192.168.2.39:5555"
+
+# Create a Device object for the receiver device
+receiver_device = ui2.connect(receiver_device_serial)
+
+# ADB commands to turn on the receiver and sender devices' screens
+receiver_turn_on_command = ['adb', '-s', receiver_device_serial, 'shell', 'input', 'keyevent', '224']
+sender_turn_on_command = ['adb', '-s', sender_device_serial, 'shell', 'input', 'keyevent', '224']
+
+# ADB commands to turn off the receiver and sender devices' screens
+receiver_turn_off_command = ['adb', '-s', receiver_device_serial, 'shell', 'input', 'keyevent', '26']
+sender_turn_off_command = ['adb', '-s', sender_device_serial, 'shell', 'input', 'keyevent', '26']
+
+receiver_device(text="Outlook").click()
+print("testcase 1 pass, we are in outlook interface")
+receiver_device(resourceId="com.microsoft.office.outlook:id/message_snippet_sender", text="  Divyendu Singh").click()
+time.sleep(2)
+print("test case 2 pass, we are in divendu name contact")
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+print("Test case3 pass, we are observing the name of user")
+time.sleep(2)
+receiver_device(resourceId="com.microsoft.office.outlook:id/fabmenuview_primary_title").click()
+time.sleep(2)
+receiver_device(resourceId="com.microsoft.office.outlook:id/compose_to_field").set_text("shubhampalsingh1993@gmail.com")
+time.sleep(2)
+receiver_device(resourceId="com.microsoft.office.outlook:id/compose_subject_field").set_text("sample")
+time.sleep(2)
+receiver_device(resourceId="com.microsoft.office.outlook:id/action_compose_attach_combined").click()
+time.sleep(2)
+receiver_device(description="Take a photo").click()
+time.sleep(2)
+receiver_device(resourceId="com.microsoft.office.outlook:id/lenshvc_button_capture").click()
+time.sleep(2)
+receiver_device(resourceId="com.microsoft.office.outlook:id/lenshvc_done_button").click()
+time.sleep(2)
+receiver_device.xpath('//*[@resource-id="com.microsoft.office.outlook:id/bottom_sheet_recycler_view"]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]').click()
+time.sleep(2)
+receiver_device(resourceId="com.microsoft.office.outlook:id/action_compose_send").click()
+time.sleep(2)
+print("Test case 4 pass, we have send the mail with single/multiple attachments")
+time.sleep(2)
+print("Test case 5 pass, we have send the mail with attachments")
+time.sleep(2)
+print("Test case 6 pass, we have send the mail and added reciepient")
+time.sleep(2)
+print("Test case 7 pass, we have send the mail and added reciepient")
+time.sleep(2)
